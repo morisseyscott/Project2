@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1,934</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #charInput1,
+        #charInput2 {
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid black;
+            background-color: white;
+        }
+
+        #submitButton {
+            padding: 5px 10px;
+            margin: 10px 0;
+            border: 1px solid black;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        #submitButton:hover {
+            background-color: black;
+            color: white;
+        }
+
+        #imageContainer {
+            margin-top: 20px;
+        }
+
+        .displayedImage {
+            display: block;
+            margin: 10px auto;
+            max-width: 500px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <select id="charInput1">
+            <option value=""></option>
+            <script>
+                const alphabet = "ABCDEF";
+                alphabet.split("").forEach(letter => {
+                    document.write(`<option value="${letter}">${letter}</option>`);
+                });
+            </script>
+        </select>
+
+        <select id="charInput2">
+            <option value=""></option>
+            <script>
+                const alphabet2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                alphabet2.split("").forEach(letter => {
+                    document.write(`<option value="${letter}">${letter}</option>`);
+                });
+            </script>
+        </select>
+
+        <br>
+
+        <button onclick="displayImage()" id="submitButton">Words</button>
+
+        <div id="imageContainer"></div>
+    </div>
+
+    <script>
+        function displayImage() {
+            const input1_letter = document.getElementById("charInput1").value.toUpperCase();
+            const input2_letter = document.getElementById("charInput2").value.toUpperCase();
+
+            if (!input1_letter || !input2_letter) {
+                alert("Please enter two letters.");
+                return;
+            }
+
+            if (!/^[A-Z]$/.test(input1_letter) || !/^[A-Z]$/.test(input2_letter)) {
+                alert("Please enter valid letters (A-Z).");
+                return;
+            }
+
+            const imageName = input1_letter + input2_letter + ".png";
+
+            const imgElement = document.createElement("img");
+            imgElement.src = imageName;
+            imgElement.alt = "Displayed Image for " + imageName;
+            imgElement.classList.add("displayedImage");
+
+            document.getElementById("imageContainer").appendChild(imgElement);
+        }
+    </script>
+
+</body>
+
+</html>
